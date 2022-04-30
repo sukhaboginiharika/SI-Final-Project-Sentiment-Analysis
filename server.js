@@ -40,7 +40,7 @@ const endpoint = 'https://text-analytics-instance-si.cognitiveservices.azure.com
  *       - application/json
  *     parameters:
  *       - name: document
- *         description: Input to send to Sentiment API in Azure.
+ *         description: Input to send to Sentiment API in Azure with key as text.
  *         in: body
  *         required: true
  *     responses:
@@ -92,7 +92,7 @@ app.listen(port, () => {
  *       - application/json
  *     parameters:
  *       - name: document
- *         description: Input to send to Sentiment Opnion API in Azure.
+ *         description: Input to send to Sentiment Opnion API in Azure with key as text.
  *         in: body
  *         required: true
  *     responses:
@@ -105,8 +105,6 @@ app.listen(port, () => {
  */
  
  app.post('/opinion', async (req,res) =>{
-  // var strInput = JSON.stringify(req.body);
-  //   console.log(strInput);
   var text = req.body.text;
     const sentimentInput = [
       {
@@ -115,48 +113,15 @@ app.listen(port, () => {
         language: "en"
       }
     ];
-    // sentimentInput = String(sentimentInput)
     console.log(typeof(sentimentInput))
     try{
      const results = await textAnalyticsClient.analyzeSentiment(sentimentInput, { includeOpinionMining: true });
-
-    //  for (let i = 0; i < results.length; i++) {
-    //    const result = results[i];
-    //    console.log(`- Document ${result.id}`);
-    //      console.log(`\tDocument text: ${sentimentInput[i].text}`);
-    //      console.log(`\tOverall Sentiment: ${result.sentiment}`);
-    //      console.log("\tSentiment confidence scores:", result.confidenceScores);
-    //      console.log("\tSentences");
-    //      res.setHeader('Content-Type', 'application/json');
-    //      res.json(results);
-    //      for (const { sentiment, confidenceScores, opinions } of result.sentences) {
-    //        console.log(`\t- Sentence sentiment: ${sentiment}`);
-    //        console.log("\t  Confidence scores:", confidenceScores);
-    //        console.log("\t  Mined opinions");
-    //        res.json(results);
-    //        for (const { target, assessments } of opinions) {
-    //          console.log(`\t\t- Target text: ${target.text}`);
-    //          console.log(`\t\t  Target sentiment: ${target.sentiment}`);
-    //          console.log("\t\t  Target confidence scores:", target.confidenceScores);
-    //          console.log("\t\t  Target assessments");
-    //         //  res.setHeader('Content-Type', 'application/json');
-    //          res.json(results);
-    //          for (const { text, sentiment } of assessments) {
-    //            console.log(`\t\t\t- Text: ${text}`);
-    //            console.log(`\t\t\t  Sentiment: ${sentiment}`);
-    //           //  res.setHeader('Content-Type', 'application/json');
-    //            res.json(results);
-    //          }
-    //        }
-    //      }
-    //  }
       res.setHeader('Content-Type', 'application/json');
       res.json(results);
 
 
 }
 catch(err){
-  console.log("sukhabo")
   console.log(err);
 }
 });
