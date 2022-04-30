@@ -26,8 +26,8 @@ const specs = swaggerJsdoc(options);
 const {TextAnalyticsClient, AzureKeyCredential} = require("@azure/ai-text-analytics");
 const { json } = require('body-parser');
 
-const key 
-const endpoint 
+const key = "PLACE_YOUR_AZURE_API_KEY_HERE"
+const endpoint = "PLACE_YOUR_AZURE_ENDPOINT_HERE"
 
 /**
  * @swagger
