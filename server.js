@@ -118,8 +118,6 @@ app.listen(port, () => {
      const results = await textAnalyticsClient.analyzeSentiment(sentimentInput, { includeOpinionMining: true });
       res.setHeader('Content-Type', 'application/json');
       res.json(results);
-
-
 }
 catch(err){
   console.log(err);
